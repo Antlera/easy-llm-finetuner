@@ -35,7 +35,7 @@ Currently, `easy-llm-finetuner` supports the following projects:
 
 Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` environment. Check out each project's page for more specific details on how to utilize them within this system.
 
-### Get Started - Fastchat Example
+### Get Started - `Fastchat Example`
 
 1. **Run the Docker container**
 
@@ -50,7 +50,9 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
    Within the Docker container, execute the one-click training script to start fine-tuning your model.
 
    ```shell
-   ./finetune/fastchat_finetune.sh
+   docker exec -it fastchat bash
+   # After attaching to docker
+   bash ./code/easy_llm_finetuner/fastchat_finetune.sh
    ```
 
 And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
