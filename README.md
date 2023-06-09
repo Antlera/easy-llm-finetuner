@@ -14,15 +14,15 @@
 
 ### Prerequisites
 
-Ensure Docker is installed on your machine. If not, download and install it from the following links:
-
-- [Windows](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe)
-- [macOS](https://download.docker.com/mac/stable/Docker.dmg)
-- Linux (use the command below)
-  ```shell
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sh get-docker.sh
-  ```
+1. Ensure Docker is installed on your machine. If not, download and install it from the following links:
+    - [Windows](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe)
+    - [macOS](https://download.docker.com/mac/stable/Docker.dmg)
+    - Linux (use the command below)
+        ```shell
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        ```
+2. Make sure the NVIDIA drivers are properly installed on your machine if you intend to use GPU for model training. Refer to the [official NVIDIA website](https://www.nvidia.com/Download/index.aspx) for driver installation.
 
 ## Supported Projects
 
