@@ -64,15 +64,16 @@ And that's it! You are now fine-tuning your LLM using state-of-the-art methods, 
 
 | Model Types | Recommended Configurations |
 |-------------|----------------------------|
-| llama-7b     | 4090*3                     |
 | llama-13b    | 4090*8                     |
+| llama-7b     | 4090*3                     |
+
 
 ### QLora
 
 | Model Types | Recommended Configurations |
 |-------------|----------------------------|
 | llama-65b     | 4090*3                     |
-| llama-65b     | A100*3                     |
+| llama-33b     | 4090*3 or A100\*1(faster)                     |
 | llama-13b    | 4090*2                     |
 | llama-7b    | 4090*1                    |
 
