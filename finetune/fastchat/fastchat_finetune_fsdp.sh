@@ -1,8 +1,8 @@
-nohup torchrun --nproc_per_node=3 --master_port=20001 fastchat/train/train_mem.py \
+nohup torchrun --nproc_per_node=3 --master_port=$RANDOM /workspace/code/fastchat/train/train_mem.py \
     --model_name_or_path yahma/llama-7b-hf  \
-    --data_path /code/playground/data/dummy.json \
+    --data_path /workspace/code/playground/data/dummy.json \
     --bf16 True \
-    --output_dir output/vicuna_7b_dummy/ \
+    --output_dir /workspace/output/vicuna_7b_dummy/ \
     --num_train_epochs 3 \
     --per_device_train_batch_size 8 \
     --per_device_eval_batch_size 8 \
@@ -19,6 +19,6 @@ nohup torchrun --nproc_per_node=3 --master_port=20001 fastchat/train/train_mem.p
     --model_max_length 512 \
     --gradient_checkpointing True \
     --lazy_preprocess True\
-    --fsdp "full_shard auto_wrap" \
+    --fsdp "full_shard auto_wrap offload" \
     --fsdp_transformer_layer_cls_to_wrap 'LlamaDecoderLayer' \
-    --tf32 True &>"./logs/7b_alpaca1.log"&
+    --tf32 True 
