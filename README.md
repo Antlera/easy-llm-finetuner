@@ -7,7 +7,8 @@
 ![GitHub stars](https://img.shields.io/github/stars/Antlera/easy-llm-finetuner?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Antlera/easy-llm-finetuner?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/Antlera/easy-llm-finetuner?style=social)
-
+![Docker](https://img.shields.io/badge/Docker-Supported-blue)
+![License](https://img.shields.io/github/license/Antlera/easy-llm-finetuner)
 ## Introduction
 
 `easy-llm-finetuner` is a project aimed to simplify the deployment and utilization of state-of-the-art large language models (LLMs) for fine-tuning. Leveraging Docker, this project eliminates the hassle of environment setup, allowing users to focus more on model training and less on configuration.
@@ -37,7 +38,7 @@ Currently, `easy-llm-finetuner` supports the following projects:
 
 Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` environment. Check out each project's page for more specific details on how to utilize them within this system.
 
-### Get Started
+### Get Started - Fastchat Example
 
 1. **Run the Docker container**
 
@@ -56,6 +57,24 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
    ```
 
 And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
+
+## Recommended Configurations
+
+### Fastchat
+
+| Model Types | Recommended Configurations |
+|-------------|----------------------------|
+| llama-7b     | 4090*3                     |
+| llama-13b    | 4090*8                     |
+
+### QLora
+
+| Model Types | Recommended Configurations |
+|-------------|----------------------------|
+| llama-65b     | 4090*3                     |
+| llama-65b     | A100*3                     |
+| llama-13b    | 4090*2                     |
+| llama-7b    | 4090*1                    |
 
 ## Feedback & Contributions
 
