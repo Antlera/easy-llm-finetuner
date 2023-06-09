@@ -42,7 +42,7 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
    Use the provided script to start the Docker container. This script mounts your local directories for code, model data, and output to the corresponding directories in the container.
 
    ```shell
-   ./docker_run/fastchat_docker.sh
+   bash ./docker_run/easy_fastchat_docker.sh
    ```
 
 2. **Start the model training**
@@ -52,7 +52,12 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
    ```shell
    docker exec -it fastchat bash
    # After attaching to docker
-   bash ./code/easy_llm_finetuner/fastchat_finetune.sh
+
+   # For default fsdp finetuning
+   bash /workspace/easy_llm_finetuner/fastchat_finetune_fsdp.sh
+
+   # For deepspeed optimazed finetuning (more memmory efficiency)
+   bash /workspace/easy_llm_finetuner/fastchat_finetune_deepspeed.sh
    ```
 
 And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
