@@ -19,5 +19,5 @@ nohup torchrun --nproc_per_node=3 --master_port=$RANDOM /workspace/code/fastchat
     --model_max_length 512 \
     --gradient_checkpointing True \
     --lazy_preprocess True\
-    --deepspeed "/workspace/code/configs/default_offload_opt_param.json" \
+    --deepspeed "/workspace/easy_llm_finetuner/finetune/configs/default_offload_opt_param.json" \
     --tf32 True &>"/workspace/code/logs/7b_dummy_docker1.log"&
