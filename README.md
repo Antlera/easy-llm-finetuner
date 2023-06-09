@@ -39,28 +39,20 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
 
 ### Get Started
 
-1. **Pull the Docker image**
-
-   Run the pull script provided in the repository to fetch the Docker image that's preconfigured with everything needed for LLM fine-tuning.
-
-   ```shell
-   ./pull_image.sh
-   ```
-
-2. **Run the Docker container**
+1. **Run the Docker container**
 
    Use the provided script to start the Docker container. This script mounts your local directories for code, model data, and output to the corresponding directories in the container.
 
    ```shell
-   ./run_docker.sh
+   ./docker_run/fastchat_docker.sh
    ```
 
-3. **Start the model training**
+2. **Start the model training**
 
    Within the Docker container, execute the one-click training script to start fine-tuning your model.
 
    ```shell
-   ./train_model.sh
+   ./finetune/fastchat_finetune.sh
    ```
 
 And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
