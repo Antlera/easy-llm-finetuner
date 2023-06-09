@@ -35,7 +35,9 @@ Currently, `easy-llm-finetuner` supports the following projects:
 
 Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` environment. Check out each project's page for more specific details on how to utilize them within this system.
 
-### Get Started - `Fastchat Example`
+### Get Started
+
+#### `Easy Fastchat Example`
 
 1. **Run the Docker container**
 
@@ -61,6 +63,46 @@ Each of these projects can be easily fine-tuned using the `easy-llm-finetuner` e
    ```
 
 And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
+
+#### `Customized Example`
+
+
+1. **Modify the mount directory**
+   Replace <Your code directory>, <Your input directory>, and <Your output directory> with your actual directories in the provided script.
+
+   ```shell
+   ### Easy-LLM-Finetuner/docker_run/fastchat_docker.sh
+   CODE_DIR="<Your code directory>"
+   INPUT_DIR="<Your input directory>"
+   OUTPUT_DIR="<Your output directory>"
+   ```
+
+2. **Run the Docker container**
+
+   Use the provided script to start the Docker container. This script mounts your local directories for code, model data, and output to the corresponding directories in the container.
+
+   ```shell
+   bash ./docker_run/fastchat_docker.sh
+   ```
+
+3. **Start the model training**
+
+   Within the Docker container, execute the one-click training script to start fine-tuning your model.
+
+   ```shell
+   docker exec -it fastchat bash
+   # After attaching to docker
+
+   # For default fsdp finetuning
+   bash /workspace/easy_llm_finetuner/fastchat_finetune_fsdp.sh
+
+   # For deepspeed optimazed finetuning (more memmory efficiency)
+   bash /workspace/easy_llm_finetuner/fastchat_finetune_deepspeed.sh
+   ```
+
+And that's it! You are now fine-tuning your LLM using state-of-the-art methods, all within a neatly encapsulated environment.
+
+
 
 ## Recommended Configurations
 
