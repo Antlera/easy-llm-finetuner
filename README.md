@@ -4,10 +4,7 @@
 
 # Easy-LLM-Finetuner:Easy Setup for LLM Finetuning.
 
-![GitHub stars](https://img.shields.io/github/stars/Antlera/easy-llm-finetuner?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Antlera/easy-llm-finetuner?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/Antlera/easy-llm-finetuner?style=social)
-![Docker](https://img.shields.io/badge/Docker-Supported-blue)
+![Docker](https://img.shields.io/badge/Docker-Based-blue)
 ![License](https://img.shields.io/github/license/Antlera/easy-llm-finetuner)
 ## Introduction
 
