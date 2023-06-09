@@ -1,6 +1,6 @@
 nohup torchrun --nproc_per_node=3 --master_port=$RANDOM /workspace/code/fastchat/train/train_mem.py \
     --model_name_or_path yahma/llama-7b-hf  \
-    --data_path /workspace/code/playground/data/dummy.json \
+    --data_path /workspace/code/data/dummy_conversation.json \
     --bf16 True \
     --output_dir /workspace/output/vicuna_7b_dummy/ \
     --num_train_epochs 3 \

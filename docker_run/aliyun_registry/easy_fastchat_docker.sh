@@ -5,5 +5,5 @@ docker run -dt --name fastchat --shm-size 64g --restart=always --gpus all --netw
 -v "${current_dir}/workspace/code/Fastchat":"/workspace/code" \
 -v "${current_dir}/finetune/fastchat":"/workspace/easy_llm_finetuner" \
 -w /workspace \
-tafflan/llm_dockers:fastchat-0.0.2 \
+registry.cn-hangzhou.aliyuncs.com/llm_dockers/fastchat:0.0.2 \
 /bin/bash
