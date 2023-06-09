@@ -1,4 +1,8 @@
-# easy-llm-finetuner
+<p align="center">
+    <img src="./assets/logo.jpg" alt="logo">
+</p>
+
+# Easy-LLM-Finetuner:Easy Setup for LLM Finetuning.
 
 ![GitHub stars](https://img.shields.io/github/stars/Antlera/easy-llm-finetuner?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Antlera/easy-llm-finetuner?style=social)
