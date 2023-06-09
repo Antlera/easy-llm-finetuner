@@ -1,4 +1,4 @@
-docker run -dt --name qlora --restart=always --gpus all --network=host \
+docker run -dt --name qlora  --shm-size 64g --restart=always --gpus all --network=host \
 -v <Your code directory>:/code \
 -v <Your model and dataset directory>:/hf \
 -v <Your output directory>:/output \
