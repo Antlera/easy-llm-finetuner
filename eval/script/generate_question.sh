@@ -1,0 +1,1 @@
+python -m eval.generate_questions --category '法律问答' 
