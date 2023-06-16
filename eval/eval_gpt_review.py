@@ -16,9 +16,6 @@ logger = logging.getLogger(__name__)
 MAX_API_RETRY = 5
 REQ_TIME_GAP = 10
 
-# os.environ["OPENAI_API_KEY"] = "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" # replace with your actual OpenAI API key
-
-# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 @ray.remote(num_cpus=4)
