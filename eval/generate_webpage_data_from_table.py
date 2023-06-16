@@ -36,7 +36,7 @@ def trim_hanging_lines(s: str, n: int) -> str:
 
 
 if __name__ == "__main__":
-    questions = read_jsonl("eval/table/法律问答_questions.jsonl", key="question_id")
+    questions = read_jsonl("eval/table/question.jsonl", key="question_id")
 
     base_model_answers = read_jsonl("eval/table/answer/answer_{}.jsonl".format(base_model_name), key="question_id")
     tuned_model_answers = read_jsonl("eval/table/answer/answer_{}.jsonl".format(tuned_model_name), key="question_id")
