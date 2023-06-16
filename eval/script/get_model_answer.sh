@@ -1,38 +1,35 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES=1
-MODEL_NAME="vicuna-7b"
-BASE_MODEL_PATH="/home/lan/CodeSpace/FastChat/model_zoo/vicuna-7b"
-TUNED_MODEL_PATH="/home/lan/CodeSpace/FastChat/output/vicuna7b_CrimeKGAssitantClean_1/checkpoint-1272"
+# Set CUDA_VISIBLE_DEVICES environment variable
+export CUDA_VISIBLE_DEVICES=0
 
-MODELS=("base" "tuned")
+# Project name
+project_name="$PROJECT_NAME"
 
-for MODEL_PATH in "${MODELS[@]}"
+# Base model path and tuned model path
+base_model_path="$BASE_MODEL_PATH"
+tuned_model_path="$TUNED_MODEL_PATH"
+
+# Base model name and tuned model name
+base_model_name="$BASE_MODEL_NAME"
+tuned_model_name="$TUNED_MODEL_NAME"
+
+# Array of model paths and model names
+model_paths=("$base_model_path" "$tuned_model_path")
+model_names=("$base_model_name" "$tuned_model_name")
+
+# Loop through model_paths array
+for index in "${!model_paths[@]}"
 do
-    # 根据 MODEL_PATH 类型构建完整的模型路径
-    if [[ $MODEL_PATH == "base" ]]; then
-        FULL_MODEL_PATH="$BASE_MODEL_PATH"
-    elif [[ $MODEL_PATH == "tuned" ]]; then
-        FULL_MODEL_PATH="$TUNED_MODEL_PATH"
-    else
-        echo "Invalid MODEL_PATH specified. Please provide 'base' or 'tuned'."
-        exit 1
-    fi
-
-    # 在这里执行你想要的操作，使用 $FULL_MODEL_PATH 来访问当前模型路径
-    echo "Processing model: $FULL_MODEL_PATH"
-
-    # 根据 MODEL_PATH 类型构建 MODEL_ID
-    if [[ $MODEL_PATH == "base" ]]; then
-        MODEL_ID="base"
-    elif [[ $MODEL_PATH == "tuned" ]]; then
-        MODEL_ID="tuned"
-    fi
-
-    echo "Processing model id: $MODEL_ID"
+    # Get the current model path and model name
+    model_path="${model_paths[$index]}"
+    model_name="${model_names[$index]}"
     
-    # 例如，可以调用 Python 脚本，并将模型路径作为参数传递
-    python -m eval.get_model_answer --model-id $MODEL_ID --model-path $FULL_MODEL_PATH --question-file eval/table/question.jsonl --answer-file "eval/table/answer/answer_${MODEL_NAME}_${MODEL_ID}.jsonl" --num-gpus 1
+    # Print the current model being processed
+    echo "Processing model: $model_path"
 
-    # 或者可以执行其他操作，如复制、移动或删除文件等
+    # Call the Python script with the corresponding model ID, model path, and other files
+    python -m eval.get_model_answer --model-id "$model_name" --model-path "$model_path" --question-file "eval/table/question/${project_name}/questions.jsonl" --answer-file "eval/table/answer/${project_name}/answer_${model_name}.jsonl" --num-gpus 1
+
 done
+
