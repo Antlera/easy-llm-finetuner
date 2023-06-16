@@ -13,7 +13,7 @@ from eval.utils import disable_torch_init
 
 
 def run_eval(model_path, model_id, question_file, answer_file, num_gpus):
-    # split question file into num_gpus files
+    # Split question file into num_gpus files
     ques_jsons = []
     with open(os.path.expanduser(question_file), "r") as ques_file:
         for line in ques_file:
@@ -32,9 +32,13 @@ def run_eval(model_path, model_id, question_file, answer_file, num_gpus):
     for ans_handle in ans_handles:
         ans_jsons.extend(ray.get(ans_handle))
 
+    # Create the directory if it doesn't exist
+    output_dir = os.path.dirname(os.path.expanduser(answer_file))
+    os.makedirs(output_dir, exist_ok=True)
+
     with open(os.path.expanduser(answer_file), "w") as ans_file:
         for line in ans_jsons:
-            ans_file.write(json.dumps(line,ensure_ascii=False) + "\n")
+            ans_file.write(json.dumps(line, ensure_ascii=False) + "\n")
 
 
 @ray.remote(num_gpus=1)

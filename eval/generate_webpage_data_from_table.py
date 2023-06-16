@@ -1,20 +1,15 @@
 """Generate json file for webpage."""
+import argparse
 import json
 import logging
 import os
 import re
-model_name = "vicuna-7b"
-base_model_name = "vicuna-7b_base"
-tuned_model_name = "vicuna-7b_tuned"
+
 models = ["tuned", "base"]
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-# 获取当前工作目录
-current_directory = os.getcwd()
 
-# 打印当前工作目录
-print("Current directory:", current_directory)
 def read_jsonl(path: str, key: str = None):
     data = []
     with open(os.path.expanduser(path)) as f:
@@ -36,16 +31,32 @@ def trim_hanging_lines(s: str, n: int) -> str:
 
 
 if __name__ == "__main__":
-    questions = read_jsonl("eval/table/question.jsonl", key="question_id")
 
-    base_model_answers = read_jsonl("eval/table/answer/answer_{}.jsonl".format(base_model_name), key="question_id")
-    tuned_model_answers = read_jsonl("eval/table/answer/answer_{}.jsonl".format(tuned_model_name), key="question_id")
 
-    logger.info("eval/table/review/{}/review_{}_{}.jsonl".format(model_name,tuned_model_name, base_model_name))
+    # Create an argument parser
+    parser = argparse.ArgumentParser(description='Generate JSON file for webpage.')
+    parser.add_argument('--project_name', required=True, help='Name of the project')
+    parser.add_argument('--basemodel', required=True, help='Name of the base model')
+    parser.add_argument('--tunedmodel', required=True, help='Name of the tuned model')
+    args = parser.parse_args()
+
+    # Get command-line arguments
+    project_name = args.project_name
+    base_model_name = args.basemodel
+    tuned_model_name = args.tunedmodel
+
+    # Load data from JSON files
+    questions = read_jsonl("eval/table/question/{}/questions.jsonl".format(project_name), key="question_id")
+    base_model_answers = read_jsonl("eval/table/answer/{}/answer_{}.jsonl".format(project_name, base_model_name), key="question_id")
+    tuned_model_answers = read_jsonl("eval/table/answer/{}/answer_{}.jsonl".format(project_name, tuned_model_name), key="question_id")
+
+    # Load review data
+    logger.info("eval/table/review/{}/review_{}_{}.jsonl".format(project_name, tuned_model_name, base_model_name))
     review = read_jsonl(
-        "eval/table/review/{}/review_{}_{}.jsonl".format(model_name,tuned_model_name, base_model_name), key="question_id"
+        "eval/table/review/{}/review_{}_{}.jsonl".format(project_name, tuned_model_name, base_model_name), key="question_id"
     )
     logger.info("Loaded {} records".format(len(review)))
+
 
     records = []
     for qid in questions.keys():

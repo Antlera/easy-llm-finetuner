@@ -49,29 +49,37 @@ def generate_questions(category, example_questions, start_id):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--category', type=str, required=True)
+    parser.add_argument('--category', type=str, required=True, help='Category of the questions')
+    parser.add_argument('--srcfile', type=str, required=True, help='Path to the source file for reference questions')
+    parser.add_argument('--outfile', type=str, required=True, help='Path to save the final generated questions combining reference and GPT-generated questions')
     args = parser.parse_args()
 
-    category = args.category
-    output_dir = 'eval/table'
+    category = args.category  # Category of the questions
+    src_file = args.srcfile  # Path to the source file for reference questions
+    out_file = args.outfile  # Path to save the final generated questions
 
-    # Load example questions from a json file
-    with open('example_questions.json', 'r') as f:
+    example_questions = load_reference_questions(src_file)
+
+    # Add example questions to the output list
+    questions = [{"question_id": i + 1, "text": question, "category": category} for i, question in enumerate(example_questions)]
+
+    # Generate new questions using GPT
+    questions += generate_questions(category, example_questions, len(questions) + 1)
+
+    # Write the questions to the output JSON file
+    with open(out_file, 'w') as f:
+        for question in questions:
+            f.write(json.dumps(question, ensure_ascii=False) + '\n')
+
+    logger.info(f"Questions have been saved to {out_file}")
+
+def load_reference_questions(file_path):
+    # Load example questions from the input JSON file
+    with open(file_path, 'r') as f:
         example_questions_data = json.load(f)
     example_questions = [example['input'] for example in example_questions_data]
-    
-    # Add example questions to the output list
-    questions = [{"question_id": i+1, "text": question, "category": category} for i, question in enumerate(example_questions)]
-    
-    # Generate new questions
-    questions += generate_questions(category, example_questions, len(questions) + 1)
-    
-    output_file = os.path.join(output_dir, f"{category}_questions.jsonl")
-    with open(output_file, 'w') as f:
-        for question in questions:
-            f.write(json.dumps(question,ensure_ascii=False) + '\n')
-    
-    logger.info(f"Questions have been saved to {output_file}")
+    return example_questions
 
 if __name__ == "__main__":
     main()
+

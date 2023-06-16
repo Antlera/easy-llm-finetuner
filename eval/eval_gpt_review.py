@@ -158,7 +158,11 @@ if __name__ == "__main__":
         time.sleep(REQ_TIME_GAP)
 
     reviews = ray.get(handles)
-    with open(f"{args.output_review_file}", "w") as output_review_file:
+    # Create the directory if it doesn't exist
+    output_dir = os.path.dirname(args.output_review_file)
+    os.makedirs(output_dir, exist_ok=True)
+
+    with open(args.output_review_file, "w") as output_review_file:
         for idx, review in enumerate(reviews):
             scores = parse_score(review)
             review_jsons[idx]["text"] = review

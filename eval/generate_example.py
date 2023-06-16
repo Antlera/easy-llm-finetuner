@@ -1,18 +1,37 @@
+import argparse
 import json
 import random
+import os
 
-# 从源 JSON 文件中读取数据
-with open('CrimeKgAssitantClean_52k.json', 'r') as file:
+# Create the argument parser
+parser = argparse.ArgumentParser(description='Randomly extract records from a JSON file to generate example questions using GPT.')
+parser.add_argument('--srcfile', required=True, help='Path to the source JSON file containing the original test data')
+parser.add_argument('--outfile', required=True, help='Path to save the randomly extracted example data generated from the source file')
+args = parser.parse_args()
+
+# Get the source file path and output path
+source_file_path = args.srcfile
+output_path = args.outfile
+
+# Extract the output directory path and file name from the provided output path
+output_dir_path, output_file_name = os.path.split(output_path)
+
+# Read data from the source JSON file
+with open(source_file_path, 'r') as file:
     source_data = json.load(file)
 
-# 随机抽取的记录数量
+# Specify the number of records to randomly extract
 number_of_records = 40
 
-# 随机抽取指定数量的记录
+# Randomly extract the specified number of records
 random_records = random.sample(source_data, number_of_records)
 
-# 将随机抽取的记录写入目标 JSON 文件
-with open('example_questions.json', 'w') as file:
-    json.dump(random_records, file, indent=2,ensure_ascii=False)
+# Create the output directory if it doesn't exist
+os.makedirs(output_dir_path, exist_ok=True)
 
-print(f"成功将 {number_of_records} 条记录写入 example_questions.json 文件。")
+# Write the randomly extracted records to the output JSON file
+output_file_path = os.path.join(output_dir_path, output_file_name)
+with open(output_file_path, 'w+') as file:
+    json.dump(random_records, file, indent=2, ensure_ascii=False)
+
+print(f"Successfully wrote {number_of_records} records to {output_file_path}.")
