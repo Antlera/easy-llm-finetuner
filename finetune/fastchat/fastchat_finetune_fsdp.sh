@@ -21,4 +21,4 @@ nohup torchrun --nproc_per_node=3 --master_port=$RANDOM /workspace/code/fastchat
     --lazy_preprocess True\
     --fsdp "full_shard auto_wrap offload" \
     --fsdp_transformer_layer_cls_to_wrap 'LlamaDecoderLayer' \
-    --tf32 True 
+    --tf32 True & 
